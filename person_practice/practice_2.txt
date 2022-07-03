@@ -1,0 +1,23 @@
+.section .data
+.align 3
+
+print_data:
+	.string "big data:%d\n"
+
+.section .rodata
+msg:.string "good bye!!\n"
+
+.section .text 
+.align 3 
+
+.global main
+main: 
+	stp x29,x30,[sp,-16]!
+	
+	adrp x0,msg  # 取得 msg 的地址.
+	add x0,x0,:lo12:msg  #  好像是 对齐 
+
+	bl printf 
+
+	ldp x29,x30,[sp],16
+	ret 
